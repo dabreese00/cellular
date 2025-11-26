@@ -38,6 +38,9 @@ td {
 .light {
   background-color: #ff0000;
 }
+.alive {
+  background-color: #00ff00;
+}
 </style>
 </head>
 """
