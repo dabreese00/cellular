@@ -8,44 +8,9 @@ function getPosition(x, y) {
     return row.children[x];
 }
 
-getPosition(4,6).className = "light";
-
-const box00 = {
-    x: 0,
-    y: 0,
-    className: "dead",
-};
-
-const box1010 = {
-    x: 10,
-    y: 10,
-    className: "dead",
-};
-
-getPosition(box00.x, box00.y).className = "light";
-getPosition(box1010.x, box1010.y).className = "light";
-
 function lightUp(box) {
     getPosition(box.x, box.y).className = "light";
 }
-
-const box1418 = {
-    x: 14,
-    y: 18,
-    className: "dead",
-};
-
-lightUp(box1418);
-
-const boxes = [];
-for (let i = 0; i < 100; i++) {
-    boxes.push([]);
-    for (let j = 0; j < 100; j++) {
-        boxes[i].push({x: i, y: j, className: "dead"});
-    }
-}
-
-lightUp(boxes[2][2]);
 
 function neighborhood(x, y) {
     const naiveNbhd = [
@@ -83,22 +48,9 @@ function Cell(x, y, className) {
     physical_cell.addEventListener("mousedown", function (e) { e.currentTarget.className = "alive"; });
 }
 
-const myCell = new Cell(8, 8, "dead");
-
 Cell.prototype.neighbors = function () {
     return neighborhood(this.x, this.y)
 }
-
-const nbs = myCell.neighbors();
-for (i = 0; i < nbs.length; i++) {
-    const x = nbs[i][0];
-    const y = nbs[i][1];
-    lightUp(boxes[x][y]);
-};
-
-// Show that it works for Cells too!
-lightUp(myCell);
-
 
 const theWorld = [];
 
@@ -118,8 +70,6 @@ Cell.prototype.lightNeighbors = function () {
         lightUp(theWorld[x][y]);
     }
 }
-
-theWorld[20][40].lightNeighbors();
 
 Cell.prototype.live = function () {
     this.nextClassName = "alive";
@@ -199,6 +149,3 @@ document.addEventListener("keydown", function (e) {
         intervalId = setInterval(frame, FRAME_DURATION_MS);
     }
 });
-
-
-
