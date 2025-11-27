@@ -113,6 +113,7 @@ Cell.prototype.tick = function () {
             nbsAlive++;
         }
     }
+    this.nextClassName = getPosition(this.x, this.y).className;
     if (this.isAlive() && (nbsAlive < 2 || nbsAlive > 3)) {
         this.die();
     } else if (! this.isAlive() && nbsAlive === 3) {
