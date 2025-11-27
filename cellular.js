@@ -123,6 +123,25 @@ Cell.prototype.tick = function () {
 
 
 theWorld[8][8].neighbors().forEach((i) => i.live());
+// flower
+theWorld[31][20].live();
+theWorld[30][21].live();
+theWorld[32][21].live();
+theWorld[30][22].live();
+theWorld[31][22].live();
+theWorld[32][22].live();
+theWorld[31][23].live();
+// faces
+theWorld[40][55].live();
+theWorld[41][55].live();
+theWorld[43][55].live();
+theWorld[44][55].live();
+theWorld[40][56].live();
+theWorld[44][56].live();
+theWorld[41][57].live();
+theWorld[42][57].live();
+theWorld[43][57].live();
+theWorld[42][58].live();
 
 function update() {
     for (i = 0; i < theWorld.length; i++) {
@@ -156,4 +175,8 @@ document.addEventListener("keydown", function (e) {
     } else {
         intervalId = setInterval(frame, FRAME_DURATION_MS);
     }
+});
+
+document.querySelector(".modal").addEventListener("click", function (e) {
+    e.currentTarget.style.display = "none";
 });
