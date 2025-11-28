@@ -46,7 +46,11 @@ function Cell(x, y, className) {
     physical_cell = getPosition(this.x, this.y);
     physical_cell.className = this.nextClassName;
     physical_cell.addEventListener("click", function (e) {
-        e.currentTarget.className = "alive";
+        if (e.currentTarget.className === "alive") {
+            e.currentTarget.className = "dead";
+        } else {
+            e.currentTarget.className = "alive";
+        }
     });
     physical_cell.addEventListener("mouseenter", function (e) {
         if (e.buttons === 1) {
