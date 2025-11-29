@@ -2,8 +2,27 @@ const NUM_COLUMNS = 100;
 const NUM_ROWS = 100;
 const FRAME_DURATION_MS = 1000;
 
+function generateTable(num_rows, num_columns) {
+    const tbl = document.createElement("table");
+    const tblBody = document.createElement("tbody");
+    for (let i = 0; i < num_rows; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < num_columns; j++) {
+            const cell = document.createElement("td");
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+    }
+    tbl.appendChild(tblBody);
+    e = document.querySelector("#theWorldContainer");
+    e.appendChild(tbl);
+    tbl.id = "theWorld";
+}
+
+generateTable(NUM_ROWS, NUM_COLUMNS);
+
 function getPosition(x, y) {
-    table = document.querySelector("table");
+    table = document.querySelector("#theWorld");
     row = table.rows[y];
     return row.children[x];
 }
