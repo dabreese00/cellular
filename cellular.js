@@ -189,6 +189,7 @@ document.querySelector(".modal").addEventListener("click", function (e) {
 
 document.querySelector("#reset-game-button").addEventListener("click", function (e) {
     world.element.remove();
+    world.cells = [];
     world.element = null;
     console.log("Game reset");
     const selected_rows = document.querySelector("#world-height-input").value;
