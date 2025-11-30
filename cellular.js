@@ -188,8 +188,14 @@ document.querySelector(".modal").addEventListener("click", function (e) {
 });
 
 document.querySelector("#reset-game-button").addEventListener("click", function (e) {
-    console.log("Game reset");
     world.element.remove();
     world.element = null;
+    console.log("Game reset");
+    const selected_rows = document.querySelector("#world-height-input").value;
+    const selected_columns = document.querySelector("#world-width-input").value;
+    console.log(selected_rows);
+    console.log(selected_columns);
+    world.num_rows = selected_rows;
+    world.num_columns = selected_columns;
     world.generateTable();
 });
