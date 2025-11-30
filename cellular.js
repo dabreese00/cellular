@@ -54,6 +54,7 @@ function World(num_rows, num_columns) { // Constructor
     this.num_rows = num_rows;
     this.num_columns = num_columns;
     this.cells = [];
+    this.element = null;
 }
 
 World.prototype.getCell = function (x, y) {
@@ -61,7 +62,7 @@ World.prototype.getCell = function (x, y) {
 }
 
 World.prototype.generateTable = function () {
-    tbl = document.createElement("table");
+    this.element = document.createElement("table");
     const tblBody = document.createElement("tbody");
     for (let i = 0; i < this.num_rows; i++) {
         const row = document.createElement("tr");
@@ -73,9 +74,9 @@ World.prototype.generateTable = function () {
         }
         tblBody.appendChild(row);
     }
-    tbl.appendChild(tblBody);
+    this.element.appendChild(tblBody);
     e = document.querySelector("#theWorldContainer");
-    e.appendChild(tbl);
+    e.appendChild(this.element);
 }
 
 World.prototype.starterPack = function () {
@@ -165,7 +166,6 @@ World.prototype.frame = function () {
     this.update();
 }
 
-
 const world = new World(START_ROWS, START_COLUMNS);
 world.generateTable();
 // world.starterPack();
@@ -185,4 +185,11 @@ document.addEventListener("keydown", function (e) {
 
 document.querySelector(".modal").addEventListener("click", function (e) {
     e.currentTarget.style.display = "none";
+});
+
+document.querySelector("#reset-game-button").addEventListener("click", function (e) {
+    console.log("Game reset");
+    world.element.remove();
+    world.element = null;
+    world.generateTable();
 });
