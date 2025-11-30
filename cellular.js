@@ -110,6 +110,18 @@ Cell.prototype.die = function () {
     this.nextClassName = "dead";
 }
 
+Cell.prototype.fade = function () {
+    if (this.className == "alive") {
+        this.nextClassName = "fading1";
+    } else if (this.className == "fading1") {
+        this.nextClassName = "fading2";
+    } else if (this.className == "fading2") {
+        this.nextClassName = "fading3";
+    } else if (this.className == "fading3") {
+        this.die();
+    }
+}
+
 Cell.prototype.update = function () {
     this.element.className = this.nextClassName;
 }
@@ -139,9 +151,11 @@ Cell.prototype.tick = function () {
     }
     this.nextClassName = this.element.className;
     if (this.isAlive() && (nbsAlive < 2 || nbsAlive > 3)) {
-        this.die();
+        this.fade();
     } else if (! this.isAlive() && nbsAlive === 3) {
         this.live();
+    } else if (! this.isAlive()) {
+        this.fade();
     }
 }
 
