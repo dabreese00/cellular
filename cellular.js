@@ -1,6 +1,6 @@
 const START_COLUMNS = 200;
 const START_ROWS = 200;
-const FRAME_DURATION_MS = 100;
+const FRAME_DURATION_MS = 200;
 
 function neighborhood(x, y, world) {
     const naiveNbhd = [
@@ -111,13 +111,13 @@ Cell.prototype.die = function () {
 }
 
 Cell.prototype.fade = function () {
-    if (this.className == "alive") {
+    if (this.isAlive()) {
         this.nextClassName = "fading1";
-    } else if (this.className == "fading1") {
+    } else if (this.element.className === "fading1") {
         this.nextClassName = "fading2";
-    } else if (this.className == "fading2") {
+    } else if (this.element.className == "fading2") {
         this.nextClassName = "fading3";
-    } else if (this.className == "fading3") {
+    } else if (this.element.className == "fading3") {
         this.die();
     }
 }
@@ -150,12 +150,13 @@ Cell.prototype.tick = function () {
         }
     }
     this.nextClassName = this.element.className;
+    if (! this.isAlive()) {
+        this.fade();
+    }
     if (this.isAlive() && (nbsAlive < 2 || nbsAlive > 3)) {
         this.fade();
     } else if (! this.isAlive() && nbsAlive === 3) {
         this.live();
-    } else if (! this.isAlive()) {
-        this.fade();
     }
 }
 
@@ -182,7 +183,7 @@ World.prototype.frame = function () {
 
 const world = new World(START_ROWS, START_COLUMNS);
 world.generateTable();
-// world.starterPack();
+world.starterPack();
 
 world.update();
 
