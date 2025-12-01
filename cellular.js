@@ -168,9 +168,6 @@ World.prototype.frame = function () {
 
 const world = new World(START_ROWS, START_COLUMNS);
 world.generateTable();
-// world.starterPack();
-
-world.update();
 
 let intervalId;
 
@@ -199,4 +196,10 @@ document.querySelector("#reset-game-button").addEventListener("click", function 
     world.num_rows = selected_rows;
     world.num_columns = selected_columns;
     world.generateTable();
+});
+
+document.querySelector("#add-starter-pack-button").addEventListener("click", function (e) {
+    console.log("Add starter pack");
+    world.starterPack();
+    world.update();
 });
